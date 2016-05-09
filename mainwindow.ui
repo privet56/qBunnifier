@@ -126,7 +126,7 @@
              <normaloff>:/res/cartoon.png</normaloff>:/res/cartoon.png</iconset>
            </attribute>
            <attribute name="title">
-            <string>TextRecognizer</string>
+            <string>Cartoonizer</string>
            </attribute>
           </widget>
          </widget>
@@ -239,6 +239,12 @@
    <header>ftextrecognizer.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>fCartoonizer</class>
+   <extends>QFrame</extends>
+   <header>fcartoonizer.h</header>
+   <container>1</container>
+  </customwidget>  
  </customwidgets>
  <resources>
   <include location="res.qrc"/>

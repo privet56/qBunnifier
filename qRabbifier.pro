@@ -36,7 +36,9 @@ SOURCES += main.cpp \
     ocv/ocv.cpp \
     util/w.cpp \
     ftextrecognizer.cpp \
-    fcartoonizer.cpp
+    fcartoonizer.cpp \
+    frabbifier/frabbifiermuzzlemodel.cpp \
+    frabbifier/frabbifiermuzzleitemdelegate.cpp
 
 HEADERS  += mainwindow.h \
     res.rc \
@@ -54,7 +56,9 @@ HEADERS  += mainwindow.h \
     ocv/ocv.h \
     util/w.h \
     ftextrecognizer.h \
-    fcartoonizer.h
+    fcartoonizer.h \
+    frabbifier/frabbifiermuzzlemodel.h \
+    frabbifier/frabbifiermuzzleitemdelegate.h
 
 FORMS    += mainwindow.ui \
     frabbifier.ui \
@@ -69,6 +73,7 @@ RC_FILE = res.rc
 
 INCLUDEPATH += ./util
 INCLUDEPATH += ./ocv
+INCLUDEPATH += ./frabbifier
 
 ######### opencv #########
 

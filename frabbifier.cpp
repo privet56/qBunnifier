@@ -11,6 +11,8 @@
 #include "ocv.h"
 #include "str.h"
 #include "w.h"
+#include "frabbifiermuzzlemodel.h"
+#include "frabbifiermuzzleitemdelegate.h"
 
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -27,6 +29,16 @@ fRabbifier::fRabbifier(QWidget *parent) :
 
     this->ui->lineEdit->setText(qApp->applicationDirPath()+"/demo_files/faces5.png");
     QTimer::singleShot(999, this, SLOT(on_lineEdit_returnPressed()));
+
+    {
+        this->ui->tableView;
+        fRabbifierMuzzleModel* pfRabbifierMuzzleModel = new fRabbifierMuzzleModel(this->ui->tableView);
+        this->ui->tableView->setModel(pfRabbifierMuzzleModel);
+        this->ui->tableView->selectRow(0);
+        this->ui->tableView->resizeColumnsToContents();
+        this->ui->tableView->resizeRowsToContents();
+        //this->ui->tableView->setItemDelegate(new fRabbifierMuzzleItemDelegate(this->ui->tableView));
+    }
 }
 
 fRabbifier::~fRabbifier()
@@ -55,7 +67,9 @@ void fRabbifier::on_commandLinkButton_clicked()
         QString s1(qApp->applicationDirPath()+"/res/haarcascade_frontalface_alt.xml");
         QString s2(qApp->applicationDirPath()+"/res/haarcascade_mcs_nose.xml");
         QString sFacesPic(this->ui->lineEdit->text());
-        QString s3(qApp->applicationDirPath()+"/res/muzzle2.png");
+        QModelIndexList sels = this->ui->tableView->selectionModel()->selectedRows();
+        QString idx = QString::number(sels.at(0).row());
+        QString s3(qApp->applicationDirPath()+"/res/muzzle"+idx+".png");
         string faceCascadeName = s1.toStdString();
         string noseCascadeName = s2.toStdString();
         string sAbsFNFacesPic = sFacesPic.toStdString();
@@ -74,6 +88,7 @@ void fRabbifier::on_commandLinkButton_clicked()
 void fRabbifier::setEnv(logger* pLog)
 {
     this->m_pLog = pLog;
+    ((fRabbifierMuzzleModel*)this->ui->tableView->model())->setEnv(pLog);
 }
 
 void fRabbifier::on_lineEdit_returnPressed()

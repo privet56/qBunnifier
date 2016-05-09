@@ -86,7 +86,6 @@ Mat main_overlayNose(string faceCascadeName, string noseCascadeName, string sAbs
         // Detect faces
         faceCascade.detectMultiScale(frameGray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(30, 30) );
         
-qDebug() << "#faces:" << faces.size();
         iRecognizedFaces = faces.size();
         // Draw green circles around the nose
         for(int i = 0; i < faces.size(); i++)
@@ -96,8 +95,6 @@ qDebug() << "#faces:" << faces.size();
             
             // In each face, detect the nose
             noseCascade.detectMultiScale(faceROI, noses, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30));
-            
-qDebug() << " face" << i << "  #noses:" << noses.size();
 
             //for(int j = 0; j < noses.size(); j++)
             {
@@ -109,13 +106,16 @@ qDebug() << " face" << i << "  #noses:" << noses.size();
                 {
                     iRecognizedNoses++;
 
-                    Point center( faces[i].x + noses[j].x + int(noses[j].width*0.5), faces[i].y + noses[j].y + int(noses[j].height*0.5) );
-                    int radius = int( (noses[j].width + noses[j].height)*0.25 );
-                    //circle( frame, center, radius, Scalar( 0, 255, 0 ), 4, 8, 0 );
+                    {
+                        //Point center( faces[i].x + noses[j].x + int(noses[j].width*0.5), faces[i].y + noses[j].y + int(noses[j].height*0.5) );
+                        //int radius = int( (noses[j].width + noses[j].height)*0.25 );
+                        //circle( frame, center, radius, Scalar( 0, 255, 0 ), 4, 8, 0 );
+                    }
                     
                     // Overlay moustache
                     int w = 2.7 * noses[j].width;
-                    int h = 1.3 * noses[j].height;
+                    int h = 2.7 * noses[j].height;
+
                     int x = faces[i].x + noses[j].x - (0.30) * w;
                     int y = faces[i].y + noses[j].y - (0.01) * h;
                     
@@ -151,6 +151,65 @@ qDebug() << " face" << i << "  #noses:" << noses.size();
     // Close all windows
     //destroyAllWindows();
     
-qDebug() << "END";
+    //qDebug() << "END";
     return frame;
+}
+
+Mat cartoonize(string fn)
+{
+    Mat img= imread(fn);
+
+    /** EDGES **/
+    // Apply median filter to remove possible noise
+    Mat imgMedian;
+    medianBlur(img, imgMedian, 7);
+
+    // Detect edges with canny
+    Mat imgCanny;
+    Canny(imgMedian, imgCanny, 50, 150);
+
+    // Dilate the edges
+    Mat kernel= getStructuringElement(MORPH_RECT, Size(2,2));
+    dilate(imgCanny, imgCanny, kernel);
+
+    // Scale edges values to 1 and invert values
+    imgCanny= imgCanny/255;
+    imgCanny= 1-imgCanny;
+
+    // Use float values to allow multiply between 0 and 1
+    Mat imgCannyf;
+    imgCanny.convertTo(imgCannyf, CV_32FC3);
+
+    // Blur the edgest to do smooth effect
+    blur(imgCannyf, imgCannyf, Size(5,5));
+
+    /** COLOR **/
+    // Apply bilateral filter to homogenizes color
+    Mat imgBF;
+    bilateralFilter(img, imgBF, 9, 150.0, 150.0);
+
+    // truncate colors
+    Mat result= imgBF/25;
+    result= result*25;
+
+    /** MERGES COLOR + EDGES **/
+    // Create a 3 channles for edges
+    Mat imgCanny3c;
+    Mat cannyChannels[]={ imgCannyf, imgCannyf, imgCannyf};
+    merge(cannyChannels, 3, imgCanny3c);
+
+    // Convert color result to float
+    Mat resultf;
+    result.convertTo(resultf, CV_32FC3);
+
+    // Multiply color and edges matrices
+    multiply(resultf, imgCanny3c, resultf);
+
+    // convert to 8 bits color
+    resultf.convertTo(result, CV_8UC3);
+
+    // Show image
+    //imshow("Result", result);
+    return result;
+
 }

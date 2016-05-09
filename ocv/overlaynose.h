@@ -9,5 +9,6 @@
 using namespace std;
 
 cv::Mat main_overlayNose(string faceCascadeName, string noseCascadeName, string sAbsFNPicWithFace, string sAbsFNPic, int& iRecognizedFaces, int& iRecognizedNoses);
+cv::Mat cartoonize(string fn);
 
 #endif // OVERLAYNOSE_H

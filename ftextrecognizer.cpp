@@ -1,6 +1,7 @@
 #include "ftextrecognizer.h"
 #include "ui_ftextrecognizer.h"
 #include "segmentocr.h"
+#include "ocr.h"
 
 #include <QTimer>
 #include <QDebug>
@@ -74,7 +75,12 @@ void fTextRecognizer::on_commandLinkButton_clicked()
     this->setImage(qimg);
 
     int iFoundRegions=0;
+#ifdef USE_OPENCV_TEXT_MODULE
+    std::string txt = main_ocr2(pic, "eng", iFoundRegions);
+#else
     std::string txt = main_ocr(pic, "eng", iFoundRegions);
+#endif
+
     QString sTxt = QString::fromStdString(txt).trimmed();
     this->ui->labelTxt->setText(sTxt);
     this->m_pLog->inf("found text regions:"+QString::number(iFoundRegions)+" text len:"+QString::number(sTxt.length()));

@@ -68,7 +68,7 @@ vector<RotatedRect> findTextAreas(Mat input)
 	return areas;
 }
 
-Mat deskewAndCrop(Mat input, const RotatedRect& box)
+Mat deskewAndCrop_segmentocr(Mat input, const RotatedRect& box)
 {
 	double angle = box.angle;	
 	Size2f size = box.size;
@@ -139,7 +139,7 @@ std::string main_ocr(std::string sAbsFN, std::string language, int& iFoundRegion
     for (auto& region : regions)
     {
 		//Crop 
-		auto cropped = deskewAndCrop(ticket, region);
+        auto cropped = deskewAndCrop_segmentocr(ticket, region);
         string text = identifyText(cropped, language);
 		
         sre += string(text);

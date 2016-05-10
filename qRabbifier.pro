@@ -39,7 +39,12 @@ SOURCES += main.cpp \
     fcartoonizer.cpp \
     frabbifier/frabbifiermuzzlemodel.cpp \
     frabbifier/frabbifiermuzzleitemdelegate.cpp \
-    ocv/segmentocr.cpp
+    ocv/segmentocr.cpp \
+    ocv/ocr.cpp \
+    ocv/text/erfilter.cpp \
+    ocv/text/ocr_beamsearch_decoder.cpp \
+    ocv/text/ocr_hmm_decoder.cpp \
+    ocv/text/ocr_tesseract.cpp
 
 HEADERS  += mainwindow.h \
     res.rc \
@@ -60,7 +65,13 @@ HEADERS  += mainwindow.h \
     fcartoonizer.h \
     frabbifier/frabbifiermuzzlemodel.h \
     frabbifier/frabbifiermuzzleitemdelegate.h \
-    ocv/segmentocr.h
+    ocv/segmentocr.h \
+    ocv/ocr.h \
+    ocv/text/precomp.hpp \
+    ocv/text/opencv2/text.hpp \
+    ocv/text/opencv2/text_config.hpp \
+    ocv/text/opencv2/text/erfilter.hpp \
+    ocv/text/opencv2/text/ocr.hpp
 
 FORMS    += mainwindow.ui \
     frabbifier.ui \
@@ -74,8 +85,11 @@ DISTFILES += ico.ico
 RC_FILE = res.rc
 
 INCLUDEPATH += ./util
-INCLUDEPATH += ./ocv
 INCLUDEPATH += ./frabbifier
+INCLUDEPATH += ./ocv
+INCLUDEPATH += ./ocv/text
+INCLUDEPATH += ./ocv/text/opencv2
+INCLUDEPATH += ./ocv/text/opencv2/text
 
 ######### opencv #########
 

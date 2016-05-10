@@ -20,6 +20,9 @@
 
 #include "overlaynose.h"
 
+using namespace std;
+using namespace cv;
+
 fCartoonizer::fCartoonizer(QWidget *parent) :
     QFrame(parent),
     ui(new Ui::fCartoonizer)

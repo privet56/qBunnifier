@@ -7,7 +7,7 @@ ocv::ocv(QObject *parent) : QObject(parent)
 
 }
 
-QImage ocv::MatToQImage(const Mat& mat)
+QImage ocv::MatToQImage(const cv::Mat& mat)
 {
     // 8-bits unsigned, NO. OF CHANNELS=1
     if(mat.type()==CV_8UC1)

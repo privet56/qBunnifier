@@ -6,9 +6,8 @@
 #include "opencv2/objdetect/objdetect.hpp"
 
 #include <iostream>
-using namespace std;
 
-cv::Mat main_overlayNose(string faceCascadeName, string noseCascadeName, string sAbsFNPicWithFace, string sAbsFNPic, int& iRecognizedFaces, int& iRecognizedNoses);
-cv::Mat cartoonize(string fn);
+cv::Mat main_overlayNose(std::string faceCascadeName, std::string noseCascadeName, std::string sAbsFNPicWithFace, std::string sAbsFNPic, int& iRecognizedFaces, int& iRecognizedNoses);
+cv::Mat cartoonize(std::string fn);
 
 #endif // OVERLAYNOSE_H

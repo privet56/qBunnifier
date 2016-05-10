@@ -38,7 +38,8 @@ SOURCES += main.cpp \
     ftextrecognizer.cpp \
     fcartoonizer.cpp \
     frabbifier/frabbifiermuzzlemodel.cpp \
-    frabbifier/frabbifiermuzzleitemdelegate.cpp
+    frabbifier/frabbifiermuzzleitemdelegate.cpp \
+    ocv/segmentocr.cpp
 
 HEADERS  += mainwindow.h \
     res.rc \
@@ -58,7 +59,8 @@ HEADERS  += mainwindow.h \
     ftextrecognizer.h \
     fcartoonizer.h \
     frabbifier/frabbifiermuzzlemodel.h \
-    frabbifier/frabbifiermuzzleitemdelegate.h
+    frabbifier/frabbifiermuzzleitemdelegate.h \
+    ocv/segmentocr.h
 
 FORMS    += mainwindow.ui \
     frabbifier.ui \
@@ -104,9 +106,34 @@ win32:CONFIG(release, debug|release): LIBS += -L../libs/opencv-master/binWin64VS
 win32:CONFIG(debug, debug|release): LIBS += -L../libs/opencv-master/binWin64VS2013/3rdparty/lib/Debug/
 
 CONFIG(debug, debug|release) {
-    LIBS += -llibtiffd -llibpngd -llibjpegd -lopencv_videostab310d -lopencv_superres310d -lopencv_stitching310d -lopencv_shape310d -lopencv_photo310d -lopencv_objdetect310d -lopencv_calib3d310d -lopencv_features2d310d -lopencv_ml310d -lopencv_highgui310d -lopencv_videoio310d -lopencv_imgcodecs310d -lopencv_flann310d -lopencv_video310d -lopencv_imgproc310d -lopencv_core310d
+    LIBS += -llept173d -ltesseract305d -llibtiffd -llibpngd -llibjpegd -lopencv_videostab310d -lopencv_superres310d -lopencv_stitching310d -lopencv_shape310d -lopencv_photo310d -lopencv_objdetect310d -lopencv_calib3d310d -lopencv_features2d310d -lopencv_ml310d -lopencv_highgui310d -lopencv_videoio310d -lopencv_imgcodecs310d -lopencv_flann310d -lopencv_video310d -lopencv_imgproc310d -lopencv_core310d
 }
 
 CONFIG(release, debug|release) {
-    LIBS += -llibtiff -llibpng -llibjpeg -lopencv_videostab310 -lopencv_superres310 -lopencv_stitching310 -lopencv_shape310 -lopencv_photo310 -lopencv_objdetect310 -lopencv_calib3d310 -lopencv_features2d310 -lopencv_ml310 -lopencv_highgui310 -lopencv_videoio310 -lopencv_imgcodecs310 -lopencv_flann310 -lopencv_video310 -lopencv_imgproc310 -lopencv_core310
+    LIBS += -llept173 -ltesseract305 -llibtiff -llibpng -llibjpeg -lopencv_videostab310 -lopencv_superres310 -lopencv_stitching310 -lopencv_shape310 -lopencv_photo310 -lopencv_objdetect310 -lopencv_calib3d310 -lopencv_features2d310 -lopencv_ml310 -lopencv_highgui310 -lopencv_videoio310 -lopencv_imgcodecs310 -lopencv_flann310 -lopencv_video310 -lopencv_imgproc310 -lopencv_core310
 }
+
+# LEPTONICA
+DEFINES += LIBLEPT_EXPORTS
+DEFINES += HAVE_CONFIG_H
+DEFINES += leptonica_EXPORTS
+
+INCLUDEPATH += ../libs/leptonica-1.73
+win32:CONFIG(release, debug|release): LIBS += -L../libs/leptonica-1.73/binWin64VS2013/src/Release/
+win32:CONFIG(debug, debug|release): LIBS += -L../libs/leptonica-1.73/binWin64VS2013/src/Debug/
+
+# TESSERACT
+DEFINES += WIN32
+DEFINES += _WINDOWS
+DEFINES += TESS_EXPORTS
+DEFINES += _CRT_SECURE_NO_WARNINGS
+DEFINES += _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS=1
+DEFINES += USE_STD_NAMESPACE=1
+DEFINES += tesseract_EXPORTS
+
+INCLUDEPATH += ../libs/tesseract-master/api
+INCLUDEPATH += ../libs/tesseract-master/ccmain
+INCLUDEPATH += ../libs/tesseract-master/ccutil
+INCLUDEPATH += ../libs/tesseract-master/ccstruct
+win32:CONFIG(release, debug|release): LIBS += -L../libs/tesseract-master/binWin64VS2013/Release/
+win32:CONFIG(debug, debug|release): LIBS += -L../libs/tesseract-master/binWin64VS2013/Debug/

@@ -20,6 +20,9 @@
 
 #include "overlaynose.h"
 
+using namespace std;
+using namespace cv;
+
 fRabbifier::fRabbifier(QWidget *parent) :
     QFrame(parent),
     m_pLog(nullptr),

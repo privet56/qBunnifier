@@ -22,6 +22,7 @@ MainWindow::MainWindow(QSplashScreen* pSplash, logger* pLog, QWidget *parent) :
 
     this->ui->Rabbifier->setEnv(this->m_pLog);
     this->ui->Cartoonizer->setEnv(this->m_pLog);
+    this->ui->TextRecognizer->setEnv(this->m_pLog);
 
     this->ui->eLog->SetStatusBar(this->statusBar());
     this->m_pLog->SetLogWnd(this->ui->eLog);

@@ -10,16 +10,13 @@
 #include <QObject>
 #include <QImage>
 
-using namespace std;
-using namespace cv;
-
 class ocv : public QObject
 {
     Q_OBJECT
 public:
     explicit ocv(QObject *parent = 0);
 
-    static QImage MatToQImage(const Mat& mat);
+    static QImage MatToQImage(const cv::Mat& mat);
 
 signals:
 

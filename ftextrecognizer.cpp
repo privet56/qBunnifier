@@ -68,21 +68,25 @@ void fTextRecognizer::on_commandLinkButton_clicked()
     {
         return;
     }
-
+//TODO: progress bar & wait dlg
     QString sPic(this->ui->lineEdit->text());
     std::string pic = sPic.toStdString();
     QImage qimg(sPic);
     this->setImage(qimg);
 
+//TODO: lang chooser
+    string lang = "eng";//tessdata/*.numbers
+
     int iFoundRegions=0;
 #ifdef USE_OPENCV_TEXT_MODULE
-    std::string txt = main_ocr2(pic, "eng", iFoundRegions);
+    std::string txt = main_ocr2(pic, lang, iFoundRegions);
 #else
-    std::string txt = main_ocr(pic, "eng", iFoundRegions);
+    std::string txt = main_ocr(pic, lang, iFoundRegions);
 #endif
 
     QString sTxt = QString::fromStdString(txt).trimmed();
-    this->ui->labelTxt->setText(sTxt);
+    this->ui->plainTextEdit->clear();
+    this->ui->plainTextEdit->appendPlainText(sTxt);
     this->m_pLog->inf("found text regions:"+QString::number(iFoundRegions)+" text len:"+QString::number(sTxt.length()));
 }
 
@@ -90,7 +94,7 @@ void fTextRecognizer::setImage(QImage& qimg)
 {
     QRect r = QApplication::desktop()->screenGeometry();
     int maxHeight = (r.height() - 333) / 2;
-    int maxWidth  = (r.width()  - 333) / 2;
+    int maxWidth  = (r.width()  - 3) / 2;
     //qDebug() << "desktopHeight:" << r.height() << " maxHeight:" << maxHeight << " imgHeight:" << qimg.height();
     while((qimg.width() > maxWidth) || (qimg.height() > maxHeight))
     {

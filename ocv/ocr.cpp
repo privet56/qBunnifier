@@ -34,7 +34,7 @@ vector<Mat> separateChannels(Mat& src)
 	exit(-1);	
 }
 
-cv::Ptr<BaseOCR> initOCR(const string& ocr) 
+cv::Ptr<BaseOCR> initOCR(const string& ocr, const char* lang)
 {
     if (ocr == "hmm")
     {
@@ -54,7 +54,7 @@ cv::Ptr<BaseOCR> initOCR(const string& ocr)
     }
     else if (ocr == "tesseract" || ocr == "tess")
     {
-        return OCRTesseract::create(nullptr, "eng");
+        return OCRTesseract::create(nullptr, lang);
 	}
 
 	throw string("Invalid OCR engine: ") + ocr;	
@@ -178,7 +178,7 @@ string main_ocr2(string sAbsFN, std::string language, int& iFoundRegions)
     string sre;
     iFoundRegions = groups.size();
     // text detection
-	auto ocr = initOCR("tesseract");
+    auto ocr = initOCR("tesseract", language.c_str());
 	for (int i = 0; i < groups.size(); i++) 
 	{
 		 Mat wordImage = drawER(channels, regions, groups[i], groupRects[i]);

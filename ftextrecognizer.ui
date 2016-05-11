@@ -20,40 +20,7 @@
    <enum>QFrame::Raised</enum>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="2">
-    <widget class="QCommandLinkButton" name="commandLinkButton">
-     <property name="maximumSize">
-      <size>
-       <width>111</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Extract Text</string>
-     </property>
-     <property name="icon">
-      <iconset resource="res.qrc">
-       <normaloff>:/res/text-x-texinfo.png</normaloff>:/res/text-x-texinfo.png</iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLineEdit" name="lineEdit"/>
-   </item>
-   <item row="0" column="1">
-    <widget class="QPushButton" name="pushButton">
-     <property name="maximumSize">
-      <size>
-       <width>33</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>...</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="3">
+   <item row="1" column="0" colspan="4">
     <widget class="QFrame" name="img">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -88,6 +55,58 @@
        </widget>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="pushButton">
+     <property name="maximumSize">
+      <size>
+       <width>33</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QCommandLinkButton" name="commandLinkButton">
+     <property name="maximumSize">
+      <size>
+       <width>111</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Extract Text</string>
+     </property>
+     <property name="icon">
+      <iconset resource="res.qrc">
+       <normaloff>:/res/text-x-texinfo.png</normaloff>:/res/text-x-texinfo.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLineEdit" name="lineEdit"/>
+   </item>
+   <item row="0" column="2">
+    <widget class="QComboBox" name="cbLang">
+     <property name="toolTip">
+      <string>Language</string>
+     </property>
+     <property name="statusTip">
+      <string>Language</string>
+     </property>
+     <property name="whatsThis">
+      <string>Language</string>
+     </property>
+     <property name="accessibleName">
+      <string>Language</string>
+     </property>
+     <property name="accessibleDescription">
+      <string>Language</string>
+     </property>
     </widget>
    </item>
   </layout>

@@ -31,8 +31,22 @@ fTextRecognizer::fTextRecognizer(QWidget *parent) :
 
     QString sImg(qApp->applicationDirPath()+"/demo_files/text1.png");
     this->ui->lineEdit->setText(sImg);
-    QImage qimg(sImg);
-    this->setImage(qimg);
+
+    {
+        QStringList langs;
+        QString sTessdataDir = str::makeAbsFN(qApp->applicationDirPath(), "/tessdata");
+        QString sPattern = "*.wordlist";
+
+        QDirIterator it(sTessdataDir, QStringList() << sPattern, QDir::Files);
+        while (it.hasNext())
+        {
+            QString sLang(it.next());
+            QFileInfo finfo(sLang);
+            langs << finfo.baseName();
+        }
+        this->ui->cbLang->addItems(langs);
+        this->ui->cbLang->setCurrentText("eng");
+    }
 }
 
 fTextRecognizer::~fTextRecognizer()
@@ -47,7 +61,13 @@ void fTextRecognizer::on_lineEdit_returnPressed()
 
 void fTextRecognizer::on_lineEdit_textChanged(const QString &arg1)
 {
-    this->ui->commandLinkButton->setEnabled(QFile::exists(arg1));
+    bool b = QFile::exists(arg1);
+    this->ui->commandLinkButton->setEnabled(b);
+    if(b)
+    {
+        QImage qimg(arg1);
+        this->setImage(qimg);
+    }
 }
 
 void fTextRecognizer::on_pushButton_clicked()
@@ -57,9 +77,6 @@ void fTextRecognizer::on_pushButton_clicked()
     if(str::isempty(sAbsFN, true))return;
 
     this->ui->lineEdit->setText(sAbsFN);
-
-    QImage qimg(sAbsFN);
-    this->setImage(qimg);
 }
 
 void fTextRecognizer::on_commandLinkButton_clicked()
@@ -71,11 +88,8 @@ void fTextRecognizer::on_commandLinkButton_clicked()
 //TODO: progress bar & wait dlg
     QString sPic(this->ui->lineEdit->text());
     std::string pic = sPic.toStdString();
-    QImage qimg(sPic);
-    this->setImage(qimg);
 
-//TODO: lang chooser
-    string lang = "eng";//tessdata/*.numbers
+    string lang = this->ui->cbLang->currentText().toStdString();
 
     int iFoundRegions=0;
 #ifdef USE_OPENCV_TEXT_MODULE
@@ -87,7 +101,7 @@ void fTextRecognizer::on_commandLinkButton_clicked()
     QString sTxt = QString::fromStdString(txt).trimmed();
     this->ui->plainTextEdit->clear();
     this->ui->plainTextEdit->appendPlainText(sTxt);
-    this->m_pLog->inf("found text regions:"+QString::number(iFoundRegions)+" text len:"+QString::number(sTxt.length()));
+    this->m_pLog->inf("found text regions:"+QString::number(iFoundRegions)+" text len:"+QString::number(sTxt.length())+" used language:"+QString::fromStdString(lang));
 }
 
 void fTextRecognizer::setImage(QImage& qimg)
@@ -95,7 +109,7 @@ void fTextRecognizer::setImage(QImage& qimg)
     QRect r = QApplication::desktop()->screenGeometry();
     int maxHeight = (r.height() - 333) / 2;
     int maxWidth  = (r.width()  - 3) / 2;
-    //qDebug() << "desktopHeight:" << r.height() << " maxHeight:" << maxHeight << " imgHeight:" << qimg.height();
+
     while((qimg.width() > maxWidth) || (qimg.height() > maxHeight))
     {
         qimg = qimg.scaled(maxWidth, maxHeight, Qt::KeepAspectRatio);

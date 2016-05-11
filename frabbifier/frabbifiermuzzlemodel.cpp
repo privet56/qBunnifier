@@ -52,7 +52,7 @@ int fRabbifierMuzzleModel::rowCount(const QModelIndex &/*parent*/) const
         i++;
     }
 
-    return i;	//TODO: look in dir for muzzle\d+
+    return i;
 }
 
 int fRabbifierMuzzleModel::columnCount(const QModelIndex &/*parent*/) const

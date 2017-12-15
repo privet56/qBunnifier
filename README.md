@@ -1,5 +1,7 @@
 Rabbifier - a Qt5 Desktop App
 
+# with OpenCV for face recognition and OCR for text recognition
+
 App GUI:
 
 GUI :

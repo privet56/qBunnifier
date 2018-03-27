@@ -9,7 +9,7 @@ GUI :
 
 Bunnifier:
 --------------
-![qrabbifier](https://cloud.githubusercontent.com/assets/15926631/15117973/62848392-160a-11e6-99de-fb7398748a05.png)
+![qrabbifier](https://raw.githubusercontent.com/privet56/qBunnifier/master/pics/bunnifier_face_recognition.png)
 (recognizes the faces on your photos and puts a bunny-muzzle on it)
 
 .
@@ -18,4 +18,14 @@ Bunnifier:
 
 Text Recognizer:
 ------------------------
-![qrabbifier textrecognizer](https://cloud.githubusercontent.com/assets/15926631/15158252/49970c34-16ef-11e6-90b0-0f7295837667.png)
+![qrabbifier2](https://raw.githubusercontent.com/privet56/qBunnifier/master/pics/bunnifier_textrecognizer.png)
+(extracts text from pictures)
+
+.
+.
+.
+
+Movie Changer:
+------------------------
+![qrabbifier3](https://raw.githubusercontent.com/privet56/qBunnifier/master/pics/bunnifier_vid_conversion.png)
+

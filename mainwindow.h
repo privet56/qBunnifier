@@ -23,6 +23,7 @@ public:
 protected:
     QSplashScreen* m_pSplash;
     logger* m_pLog;
+    void closeEvent(QCloseEvent *evt);
 
 private slots:
     void on_actionExit_triggered();

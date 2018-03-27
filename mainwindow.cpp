@@ -23,6 +23,7 @@ MainWindow::MainWindow(QSplashScreen* pSplash, logger* pLog, QWidget *parent) :
     this->ui->Rabbifier->setEnv(this->m_pLog);
     this->ui->Cartoonizer->setEnv(this->m_pLog);
     this->ui->TextRecognizer->setEnv(this->m_pLog);
+    this->ui->BlackMaker->setEnv(this->m_pLog);
 
     this->ui->eLog->SetStatusBar(this->statusBar());
     this->m_pLog->SetLogWnd(this->ui->eLog);
@@ -55,4 +56,10 @@ void MainWindow::on_actionShow_Mascot_triggered()
 {
     this->m_pSplash->showMessage(" ");
     this->m_pSplash->show();
+}
+void MainWindow::closeEvent(QCloseEvent *evt)
+{
+    Q_UNUSED(evt);
+
+    this->ui->BlackMaker->stop();
 }

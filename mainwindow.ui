@@ -91,7 +91,7 @@
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="fRabbifier" name="Rabbifier">
            <property name="accessibleName">
@@ -129,6 +129,18 @@
             <string>Cartoonizer</string>
            </attribute>
           </widget>
+          <widget class="fBlackmaker" name="BlackMaker">
+           <property name="accessibleName">
+            <string>BlackMaker</string>
+           </property>
+           <attribute name="icon">
+            <iconset resource="res.qrc">
+             <normaloff>:/res/cartoon.png</normaloff>:/res/cartoon.png</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>BlackMaker</string>
+           </attribute>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -144,7 +156,7 @@
      <x>0</x>
      <y>0</y>
      <width>900</width>
-     <height>18</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -244,7 +256,13 @@
    <extends>QFrame</extends>
    <header>fcartoonizer.h</header>
    <container>1</container>
-  </customwidget>  
+  </customwidget>
+  <customwidget>
+   <class>fBlackmaker</class>
+   <extends>QFrame</extends>
+   <header>fblackmaker.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="res.qrc"/>

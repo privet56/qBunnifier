@@ -135,10 +135,10 @@
            </property>
            <attribute name="icon">
             <iconset resource="res.qrc">
-             <normaloff>:/res/cartoon.png</normaloff>:/res/cartoon.png</iconset>
+             <normaloff>:/res/races2.png</normaloff>:/res/races2.png</iconset>
            </attribute>
            <attribute name="title">
-            <string>BlackMaker</string>
+            <string>Race Changer</string>
            </attribute>
           </widget>
          </widget>

@@ -11,6 +11,7 @@
 #include "opencv2/objdetect/objdetect.hpp"
 
 #include "overlaynose.h"
+#include "blackmaker/blackmakerthread.h"
 
 MainWindow::MainWindow(QSplashScreen* pSplash, logger* pLog, QWidget *parent) :
     QMainWindow(parent),
@@ -30,6 +31,9 @@ MainWindow::MainWindow(QSplashScreen* pSplash, logger* pLog, QWidget *parent) :
 
     QTimer::singleShot(999, pSplash, SLOT(close()));
     this->m_pLog->inf("App Startup Finished");
+    {
+        //BlackMakerThread::make();
+    }
 }
 
 MainWindow::~MainWindow()

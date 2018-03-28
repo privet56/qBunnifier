@@ -40,16 +40,19 @@
     <widget class="QCommandLinkButton" name="commandLinkButton">
      <property name="maximumSize">
       <size>
-       <width>99</width>
+       <width>66</width>
        <height>16777215</height>
       </size>
      </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
      <property name="text">
-      <string>make black!</string>
+      <string>Play!</string>
      </property>
      <property name="icon">
       <iconset resource="res.qrc">
-       <normaloff>:/res/cartoon.png</normaloff>:/res/cartoon.png</iconset>
+       <normaloff>:/res/races4.png</normaloff>:/res/races4.png</iconset>
      </property>
     </widget>
    </item>
@@ -90,7 +93,12 @@
    <item row="0" column="2">
     <widget class="QCheckBox" name="checkBox">
      <property name="text">
-      <string>Blackify </string>
+      <string>Change Race
+Chinesify</string>
+     </property>
+     <property name="icon">
+      <iconset resource="res.qrc">
+       <normaloff>:/res/races1.png</normaloff>:/res/races1.png</iconset>
      </property>
     </widget>
    </item>

@@ -25,7 +25,11 @@ Text Recognizer:
 .
 .
 
-Movie Changer:
+Race Changer / Chinesifier:
 ------------------------
 ![qrabbifier3](https://raw.githubusercontent.com/privet56/qBunnifier/master/pics/bunnifier_vid_conversion.png)
-
+.
+![qrabbifier4](https://raw.githubusercontent.com/privet56/qBunnifier/master/pics/bunnifier_vid_chinesify.2.gif)
+.
+![qrabbifier5](https://raw.githubusercontent.com/privet56/qBunnifier/master/pics/bunnifier_vid_chinesify.1.gif)
+.

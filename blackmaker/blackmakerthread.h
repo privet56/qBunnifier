@@ -20,6 +20,10 @@ protected:
     void runVid();
 public:
     static void make(cv::Mat* pInFrame, cv::Mat* pOutFrame);
+    static void make();
+
+    static void rgbHist(const cv::Mat &inputImage, cv::Mat &outputImage);
+    static void hsvHist(const cv::Mat &inputImage, cv::Mat &outputImage);
 
 signals:
     void inDisplay(QImage image);

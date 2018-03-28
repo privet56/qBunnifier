@@ -35,6 +35,10 @@ GUI :
 .
 ![qrabbifier5](https://raw.githubusercontent.com/privet56/qBunnifier/master/pics/bunnifier_vid_chinesify.1.gif)
 .
+#### Race Changer / Blackifier
+------------------------
+![qrabbifier6](https://raw.githubusercontent.com/privet56/qBunnifier/master/pics/bunnifier_vid_blackify.gif)
+.
 ## TODO:
 	Separate HSV image parser code
 	Race Changer should create more bright target color

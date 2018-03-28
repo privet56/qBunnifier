@@ -63,7 +63,7 @@ void BlackMakerThread::runVid()
 
 void BlackMakerThread::make()
 {
-    QString sFN("c:\\temp\\__\\in.png");
+    QString sFN("c:\\temp\\.__races_imgs\\in.png");
     using namespace cv;
     Mat inFrame = imread(sFN.toStdString());
     Mat outFrame;
@@ -171,7 +171,8 @@ void BlackMakerThread::hsvHist(const cv::Mat &inputImage, cv::Mat &outputImage)
     normalize( hist, hist, 0, 255, NORM_MINMAX, -1, Mat() );
     MatND backproj;
     calcBackProject( &hue, 1, 0, hist, backproj, &ranges, 1, true );
-    /*imshow( "BackProj", backproj );
+    //imshow( "BackProj", backproj );
+    /*
     {
         Mat colors(1, binsSpinvalue, CV_8UC3);
         {
@@ -217,17 +218,26 @@ void BlackMakerThread::hsvHist(const cv::Mat &inputImage, cv::Mat &outputImage)
 
                 if(false)
                 {   //makes black
-                    outputImage.at<Vec3b>(i,j)[1] -= 50;
-                    outputImage.at<Vec3b>(i,j)[2] -= 50;
+                    //outputImage.at<Vec3b>(i,j)[1] -= 50;
+                    //outputImage.at<Vec3b>(i,j)[2] -= 50;
+                    //makes black better
+                    outputImage.at<Vec3b>(i,j)[0] = 015;
+                    outputImage.at<Vec3b>(i,j)[2] -= 40;
                 }
                 else
                 {   //makes asian/chinese
                     outputImage.at<Vec3b>(i,j)[0] += 20;
                 }
 
+                outputImage.at<Vec3b>(i,j)[0] = 015;
+                outputImage.at<Vec3b>(i,j)[1] += 40;
+                outputImage.at<Vec3b>(i,j)[2] -= 40;
+
             }
-            //else if(inputImagehsvImg.at<Vec3b>(i,j)[0] > 120)
-              //  outputImage.at<Vec3b>(i,j)[0] -= 60;
+            else if(inputImagehsvImg.at<Vec3b>(i,j)[0] > 120)
+            {
+              outputImage.at<Vec3b>(i,j)[0] -= 60;
+            }
         }
       }
    }

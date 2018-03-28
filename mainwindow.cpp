@@ -32,7 +32,7 @@ MainWindow::MainWindow(QSplashScreen* pSplash, logger* pLog, QWidget *parent) :
     QTimer::singleShot(999, pSplash, SLOT(close()));
     this->m_pLog->inf("App Startup Finished");
     {
-        //BlackMakerThread::make();
+        BlackMakerThread::make();
     }
 }
 

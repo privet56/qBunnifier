@@ -1,4 +1,6 @@
 #include "blackmakerthread.h"
+#include <QElapsedTimer>
+#include <QDebug>
 
 BlackMakerThread::BlackMakerThread(QString sVidFN, logger* pLog, QObject *parent) : QThread(parent), m_sVidFN(sVidFN), m_pLog(pLog)
 {
@@ -28,8 +30,19 @@ void BlackMakerThread::runVid()
         this->m_pLog->err("Cannot open '"+m_sVidFN+"'");
     }
     Mat inFrame, outFrame;
+
+    quint64 fps = camera.get(CV_CAP_PROP_FPS);
+    if((fps < 11) || (fps > 111))
+        fps = 60;
+    quint64 nextframecomesin_ms = 1000 / fps;
+    int whileCounter = 0;
+    QElapsedTimer timer;
+    timer.start();
+
     while(camera.isOpened() && !isInterruptionRequested())
     {
+        whileCounter++;
+
         camera >> inFrame;
         if(inFrame.empty())
             continue;
@@ -58,7 +71,23 @@ void BlackMakerThread::runVid()
                             outFrame.step,
                             QImage::Format_RGB888)
                         .rgbSwapped());
+
+        quint64 elapsed_ms = timer.elapsed();
+        quint64 wait_ms = nextframecomesin_ms - elapsed_ms;
+
+        if(whileCounter < 99)
+        {
+            qDebug() << "fps:" << fps << " nextframecomesin_ms:" << nextframecomesin_ms << " elapsed_ms:" << elapsed_ms << " ==> wait_ms: " << wait_ms << " whileCounter:" << whileCounter;
+            //example output: fps: 30  nextframecomesin_ms: 33  elapsed_ms: 19  ==> wait_ms:  14  whileCounter: 94
+        }
+
+        if((wait_ms > 3) && (wait_ms < 66))
+            QThread::msleep(wait_ms);
+
+         timer.restart();
     }
+
+    camera.release();
 }
 
 void BlackMakerThread::make()
